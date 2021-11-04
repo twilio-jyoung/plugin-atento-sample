@@ -18,6 +18,11 @@ export default class AtentoSamplePlugin extends FlexPlugin {
 			flex.Actions.invokeAction("CompleteTask", { sid: payload.task.sid });
 		});
 
+		// handle customer hang-ups
+		flex.Actions.addListener("afterWrapupTask", (payload) => {
+			flex.Actions.invokeAction("CompleteTask", { sid: payload.task.sid });
+		});
+
 		// online automatically, make sure to set activity name or sid to the variables in your environment
 		console.log("setting to available");
 		flex.Actions.invokeAction("SetActivity", {
